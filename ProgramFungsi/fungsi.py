@@ -1,18 +1,30 @@
 import numpy as np
 import matplotlib.pyplot as plt
-# import seaborn as sns
 import os
 import math
+# import seaborn as sns
 
 class ProgramFungsi:
     def __init__(self):
         pass
 
-    def fungsiLinear(self, x, a, b):
+    def fungsiLinearX(self, y, a, b):
+        return (y/a)-(b/a)
+    def fungsiLinearY(self, x, a, b):
         return a * x + b
     
-    def fungsiKuadrat(self, x, a, b, c):
+    def fungsiKuadratX(self, y, a, b, c):
+        xa = -(b+math.sqrt(b**4-a*c+4*a*y)/2*a)
+        xb = -(b-math.sqrt(b**4-a*c+4*a*y)/2*a)
+        return xa, xb
+    def fungsiKuadratY(self, x, a, b, c):
         return ((a * x)**2) + (b * x) + c
+    def fungsiKuadratPuncakAbsis(self, a, b):
+        Absis = -(b/2*a)
+        return Absis
+    def fungsiKuadratPuncakOrdinat(self, a, D):
+        Ordinat = -(D/4*a)
+        return Ordinat
 
     def fungsiKubik(self, x, a, b, c, d):
         return ((a * x)**3) + ((b * x)**2) + (c * x) + d
@@ -36,7 +48,7 @@ class ProgramFungsi:
         os.system("cls")
         print("OPERASI FUNGSI KUADRAT")
         print("======================")
-        print("\n1.| Fungsi Linear (ax + b)")
+        print("\n1.| Fungsi Linear (mx + b)")
         print("2.| Fungsi Kuadrat (ax^2 + bx + c)")
         print("3.| Fungsi Kubik (ax^3 + bx^2 + cx + d)")
         print("4.| Fungsi Trigonometri")
@@ -49,12 +61,13 @@ class ProgramFungsi:
             x = float(input("Masukkan nilai x: "))
             a = float(input("Masukkan gradien (a): "))
             b = float(input("Masukkan intercept-y (b): "))
-            hasil = self.fungsiLinear(x, a, b)
+            y = self.fungsiLinear(x, a, b)
         else:
             print("Bukan pilihan yang benar")
             return
         
-        print("Hasil operasi: ", hasil)
+        print("Hasil operasi Fungsi Linear: y = mx + b =", int(y))
+        print(f"Dengan titik: [{int(x)},{int(y)}]")
 
     def mulaiFungsi(self):
         while(True):
@@ -62,6 +75,11 @@ class ProgramFungsi:
             repeater = str(input("Apakah ingin mengulang operasi(Yes/no)? "))
             if repeater.lower() != "yes":
                 break
+    
+    # def plotFungsi(self):
+    #     if choice == 1:
+
+
 if __name__ == "__main__":
     Fungsi = ProgramFungsi()
     Fungsi.mulaiFungsi()
