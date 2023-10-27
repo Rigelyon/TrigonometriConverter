@@ -1,33 +1,21 @@
-# import customtkinter as ctk
+import customtkinter as ctk
 
-# class inputFrame(ctk.CTkScrollableFrame):
-#     def __init__(self, master, **kwargs):
-#         super().__init__(master, **kwargs)
+class App(ctk.CTk):
+    def __init__(self, title, size):
+        super().__init__()
+        self.title(title)
+        self.geometry(f"{size[0]},{size[1]}")
+        self.minsize(size[0],size[1])
+        self.mainloop()
 
-#         self.label = ctk.CTkLabel(self, text="Program")
-#         self.label.grid(row=0, column=2, padx=20)
-
-# class App(ctk.CTk):
-#     def __init__(self, **kwargs):
-#         super().__init__(**kwargs)
-#         self.geometry("800x600")
-#         self.title("Program Fungsi")
-#         self.grid_rowconfigure(0, weight=1)
-#         self.grid_columnconfigure(2, weight=1)
-
-# App = ctk.CTk()
-# App.title("Program Fungsi")
-# App.geometry("800x600")
-
-# label = ctk.CTkLabel(
-#     App,
-#     text="Fungsi Kalkulus",
-#     fg_color="gray",
-#     width=15,
-#     height=30,
+class Frame(ctk.CTkFrame):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+        ctk.CTkLabel(self, text="Fungsi", fg_color="white", width=20).pack(expand=True, fill="both")
+        app = App()
+        self.pack(master=app, fill= "X")
     
-# )
-# label.pack()
 
-# if __name__ == "__main__":
-#     App.mainloop()
+if __name__ == "__main__":
+    App(title="Program Fungsi", size=(600,600))
+
