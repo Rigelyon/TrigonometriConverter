@@ -11,16 +11,13 @@ app.minsize(size[0], size[1])
 app.grid_columnconfigure(0, weight=1)
 app.grid_rowconfigure(0, weight=1)
 
-main_frame = ctk.CTkFrame(master=app, fg_color="white", corner_radius=None)
-main_frame.pack(expand=True, fill="both")
-
 def page_raise(page):
     pass
 
 def about_page():
     frame_size = (800,600)
     frame = ctk.CTkFrame(
-        master=main_frame,
+        master=app,
         width=frame_size[0],
         height=frame_size[1],
         corner_radius=None,
@@ -28,12 +25,12 @@ def about_page():
         border_color="#1e88e5",
         fg_color="white",       
     )
-    frame.pack()
+    frame.place(relx=0.5, anchor="center")
     frame.lift()
 
 
 def front_page(parent):
-    main_frame.configure(fg_color="#2196f3")
+    app.configure(fg_color="#2196f3")
     frame_size = (350,350)
 
     frame = ctk.CTkFrame(
@@ -49,9 +46,9 @@ def front_page(parent):
 
     title = ctk.CTkLabel(
         master=frame,
-        text="Program Fungsi",
+        text="Fungsi Trigonometri",
         text_color="#2196f3",
-        font=ctk.CTkFont(family="Helvetica", size=36, weight="bold"),
+        font=ctk.CTkFont(family="Helvetica", size=30, weight="bold"),
     )
     title.place(x=frame_size[0]/2,y=45, anchor="center")
 
@@ -79,5 +76,5 @@ def front_page(parent):
     about_button.place(x=frame_size[0]/2, y=(frame_size[1])-20, anchor="s")
 
 if __name__ == "__main__":
-    front_page(main_frame)
+    front_page(app)
     app.mainloop()
