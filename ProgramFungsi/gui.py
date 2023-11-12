@@ -5,6 +5,28 @@ from PIL import Image
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
+text_eula = """MIT License
+
+Copyright (c) 2023 Pandu Dwi Ashidiqi, Isep Hidayatullah and Delvina Salma Hidayah
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE."""
+
 ctk.set_appearance_mode("dark")
 
 # Define root window
@@ -12,7 +34,8 @@ app = ctk.CTk()
 SIZE_X = 1200
 SIZE_Y = 675
 app.title("Trigonometri Converter")
-app.iconbitmap("icon_white.png")
+icon = ctk.CTkImage(dark_image=Image.open("icon_white.png"))
+app.after(201, lambda: app.iconbitmap("icon_white.png"))
 app.geometry(f"{SIZE_X}x{SIZE_Y}+0,0")
 app.minsize(SIZE_X, SIZE_Y)
 app.grid_columnconfigure(0, weight=1)
@@ -113,6 +136,7 @@ def front_page():
     )
     about_button.place(relx=ABOUT_BUTTON_POS[0], y=ABOUT_BUTTON_POS[1], anchor="s")
 
+
 # About Page content
 def about_page():
     about_frame = ctk.CTkFrame(
@@ -123,6 +147,42 @@ def about_page():
     )
     about_frame.place(relx=0.5, rely=0.5, anchor="center")
 
+    logo_image = ctk.CTkImage(dark_image=Image.open("icon_white.png"), size=(70, 70))
+    logo = ctk.CTkLabel(master=about_frame, image=logo_image, text=None)
+
+    title = ctk.CTkLabel(
+        master=about_frame,
+        text="TRIGONOMETRI CONVERTER",
+        wraplength=300,
+        justify="left",
+        font=ctk.CTkFont(family="Helvetica", size=30, weight="bold"),
+    )
+
+    authors = """
+Authors:
+1. Pandu Dwi Ashidiqi (237006105)
+2. Isep Hidayatullah (237006101)
+3. Delvina Salma Hidayah (237006103)"""
+
+    authors_label = ctk.CTkLabel(
+        master=about_frame,
+        text=authors,
+        justify="left",
+        font=ctk.CTkFont(family="Helvetica", size=14, weight="normal"),
+    )
+
+    license_frame = ctk.CTkScrollableFrame(
+        master=about_frame,
+        width=400,
+        height=200,
+        label_text="EULA",
+        label_font=ctk.CTkFont(family="Helvetica", size=12, weight="bold"),
+    )
+
+    license_text = ctk.CTkLabel(
+        master=license_frame, text=text_eula, wraplength=400, justify="left"
+    )
+
     back_button = ctk.CTkButton(
         master=about_frame,
         width=200,
@@ -131,6 +191,12 @@ def about_page():
         font=ctk.CTkFont(family="Helvetica", size=18, weight="normal"),
         command=lambda: show_page(page_front),
     )
+
+    logo.place(x=130, y=65, anchor="center")
+    title.place(x=310, y=65, anchor="center")
+    authors_label.place(x=50, y=130, anchor="nw")
+    license_frame.place(relx=0.5, y=370, anchor="center")
+    license_text.pack(fill="both")
     back_button.place(relx=0.5, rely=0.95, anchor="s")
 
 
@@ -156,7 +222,9 @@ def fungsi_page():
     left_title.place(relx=0.5, y=40, anchor="center")
 
     # Define graph frame and title
-    graph_frame = ctk.CTkFrame(master=page_fungsi,)
+    graph_frame = ctk.CTkFrame(
+        master=page_fungsi,
+    )
     graph_frame.grid(
         column=1, row=0, padx=10, pady=10, columnspan=3, rowspan=2, sticky="nsew"
     )
@@ -357,14 +425,14 @@ def fungsi_page():
         return input_frame(left_frame)
 
     def graph_widgets():
-        fig = Figure(figsize=(8,4.5), dpi=100)
-        arange = np.arange(0, 3, .01)
+        fig = Figure(figsize=(8, 4.5), dpi=100)
+        arange = np.arange(0, 3, 0.01)
         fig.add_subplot(111).plot(arange, 2 * np.sin(2 * np.pi * arange))
 
         canvas = FigureCanvasTkAgg(fig, master=graph_frame)
         canvas.draw()
         canvas.get_tk_widget().place(relx=0.5, rely=0.5, anchor="center")
-        
+
     def table_widgets():
         value = [
             [
@@ -394,7 +462,7 @@ def fungsi_page():
             column=17,
             row=2,
             corner_radius=None,
-            # header_color="red",
+            font=ctk.CTkFont(family="Helvetica", size=15, weight="normal"),
             values=value,
         )
         table.place(relx=0.5, rely=0.5, relwidth=0.9, relheight=0.35, anchor="center")
