@@ -7,7 +7,7 @@ from matplotlib.figure import Figure
 
 text_eula = """MIT License
 
-Copyright (c) 2023 Pandu Dwi Ashidiqi, Isep Hidayatullah and Delvina Salma Hidayah
+Copyright (c) 2023 Pandu Dwi Ashidiqi, Isep Hidayattulah and Delvina Salma Hidayah
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -161,7 +161,7 @@ def about_page():
     authors = """
 Authors:
 1. Pandu Dwi Ashidiqi (237006105)
-2. Isep Hidayatullah (237006101)
+2. Isep Hidayattulah (237006101)
 3. Delvina Salma Hidayah (237006103)"""
 
     authors_label = ctk.CTkLabel(
