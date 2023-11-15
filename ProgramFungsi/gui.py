@@ -1,43 +1,23 @@
 import customtkinter as ctk
 import numpy as np
-from CTkTable import *
 from PIL import Image
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
-text_eula = """MIT License
-
-Copyright (c) 2023 Pandu Dwi Ashidiqi, Isep Hidayattulah and Delvina Salma Hidayah
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE."""
+with open("license", "r") as file:
+    text_eula = file.read()
 
 ctk.set_appearance_mode("dark")
 
 # Define root window
 app = ctk.CTk()
-SIZE_X = 1200
-SIZE_Y = 675
+WIDTH = 1200
+HEIGHT = 675
 app.title("Trigonometri Converter")
 icon = ctk.CTkImage(dark_image=Image.open("icon_white.png"))
 app.after(201, lambda: app.iconbitmap("icon_white.png"))
-app.geometry(f"{SIZE_X}x{SIZE_Y}+0,0")
-app.minsize(SIZE_X, SIZE_Y)
+app.geometry(f"{WIDTH}x{HEIGHT}+0,0")
+app.minsize(WIDTH, HEIGHT)
 app.grid_columnconfigure(0, weight=1)
 app.grid_rowconfigure(0, weight=1)
 
@@ -202,6 +182,7 @@ Authors:
 
 # Fungsi page content
 def fungsi_page():
+    global fungsi_choice
     app.state("zoomed")
 
     # Define left frame and title
@@ -276,14 +257,48 @@ def fungsi_page():
                     sin_entry.configure(state="normal", placeholder_text="0")
                     cos_entry.configure(state="disabled", placeholder_text=" ")
                     tan_entry.configure(state="disabled", placeholder_text=" ")
+                    cosec_entry.configure(state="disabled", placeholder_text=" ")
+                    sec_entry.configure(state="disabled", placeholder_text=" ")
+                    cotan_entry.configure(state="disabled", placeholder_text=" ")
+                    get_formula = sin_formula.cget("text")
                 elif radio_name == "Cos":
                     sin_entry.configure(state="disabled", placeholder_text=" ")
                     cos_entry.configure(state="normal", placeholder_text="0")
                     tan_entry.configure(state="disabled", placeholder_text=" ")
+                    cosec_entry.configure(state="disabled", placeholder_text=" ")
+                    sec_entry.configure(state="disabled", placeholder_text=" ")
+                    cotan_entry.configure(state="disabled", placeholder_text=" ")
+                    get_formula = cos_formula.cget("text")
                 elif radio_name == "Tan":
                     sin_entry.configure(state="disabled", placeholder_text=" ")
                     cos_entry.configure(state="disabled", placeholder_text=" ")
                     tan_entry.configure(state="normal", placeholder_text="0")
+                    cosec_entry.configure(state="disabled", placeholder_text=" ")
+                    sec_entry.configure(state="disabled", placeholder_text=" ")
+                    cotan_entry.configure(state="disabled", placeholder_text=" ")
+                    get_formula = tan_formula.cget("text")
+                elif radio_name == "Cosec":
+                    sin_entry.configure(state="disabled", placeholder_text=" ")
+                    cos_entry.configure(state="disabled", placeholder_text=" ")
+                    tan_entry.configure(state="disabled", placeholder_text=" ")
+                    cosec_entry.configure(state="normal", placeholder_text="0")
+                    sec_entry.configure(state="disabled", placeholder_text=" ")
+                    cotan_entry.configure(state="disabled", placeholder_text=" ")
+                elif radio_name == "Sec":
+                    sin_entry.configure(state="disabled", placeholder_text=" ")
+                    cos_entry.configure(state="disabled", placeholder_text=" ")
+                    tan_entry.configure(state="disabled", placeholder_text=" ")
+                    cosec_entry.configure(state="disabled", placeholder_text=" ")
+                    sec_entry.configure(state="normal", placeholder_text="0")
+                    cotan_entry.configure(state="disabled", placeholder_text=" ")
+                elif radio_name == "Cotan":
+                    sin_entry.configure(state="disabled", placeholder_text=" ")
+                    cos_entry.configure(state="disabled", placeholder_text=" ")
+                    tan_entry.configure(state="disabled", placeholder_text=" ")
+                    cosec_entry.configure(state="disabled", placeholder_text=" ")
+                    sec_entry.configure(state="disabled", placeholder_text=" ")
+                    cotan_entry.configure(state="normal", placeholder_text="0")
+                return get_formula
 
             input_frame = ctk.CTkFrame(
                 master=parent,
@@ -297,22 +312,6 @@ def fungsi_page():
             pilih_text = ctk.CTkLabel(
                 master=input_frame,
                 text="Pilih fungsi Trigonometri:",
-                font=ctk.CTkFont(family="Helvetica", size=18, weight="normal"),
-            )
-
-            x_label1 = ctk.CTkLabel(
-                master=input_frame,
-                text="x",
-                font=ctk.CTkFont(family="Helvetica", size=18, weight="normal"),
-            )
-            x_label2 = ctk.CTkLabel(
-                master=input_frame,
-                text="x",
-                font=ctk.CTkFont(family="Helvetica", size=18, weight="normal"),
-            )
-            x_label3 = ctk.CTkLabel(
-                master=input_frame,
-                text="x",
                 font=ctk.CTkFont(family="Helvetica", size=18, weight="normal"),
             )
 
@@ -344,6 +343,12 @@ def fungsi_page():
                 state="normal",
             )
 
+            sin_x_label = ctk.CTkLabel(
+                master=input_frame,
+                text="x",
+                font=ctk.CTkFont(family="Helvetica", size=18, weight="normal"),
+            )
+
             # Cosinus
             cos_button = ctk.CTkRadioButton(
                 master=input_frame,
@@ -370,6 +375,12 @@ def fungsi_page():
                 height=30,
                 placeholder_text="0",
                 state="normal",
+            )
+
+            cos_x_label = ctk.CTkLabel(
+                master=input_frame,
+                text="x",
+                font=ctk.CTkFont(family="Helvetica", size=18, weight="normal"),
             )
 
             # Tangent
@@ -400,36 +411,170 @@ def fungsi_page():
                 state="normal",
             )
 
+            tan_x_label = ctk.CTkLabel(
+                master=input_frame,
+                text="x",
+                font=ctk.CTkFont(family="Helvetica", size=18, weight="normal"),
+            )
+
+            # Cosecan
+            cosec_button = ctk.CTkRadioButton(
+                master=input_frame,
+                radiobutton_width=20,
+                radiobutton_height=20,
+                text="Cosecan",
+                value="Cosec",
+                variable=fungsi_choice,
+                font=ctk.CTkFont(family="Helvetica", size=15, weight="bold"),
+                command=lambda: radio_choice("Cosec"),
+            )
+
+            cosec_formula = ctk.CTkLabel(
+                master=input_frame,
+                width=100,
+                height=30,
+                text="y = Cosec",
+                font=ctk.CTkFont(family="Helvetica", size=18, weight="normal"),
+            )
+
+            cosec_entry = ctk.CTkEntry(
+                master=input_frame,
+                width=40,
+                height=30,
+                placeholder_text="0",
+                state="normal",
+            )
+
+            cosec_x_label = ctk.CTkLabel(
+                master=input_frame,
+                text="x",
+                font=ctk.CTkFont(family="Helvetica", size=18, weight="normal"),
+            )
+
+            # Secan
+            sec_button = ctk.CTkRadioButton(
+                master=input_frame,
+                radiobutton_width=20,
+                radiobutton_height=20,
+                text="Secan",
+                value="Sec",
+                variable=fungsi_choice,
+                font=ctk.CTkFont(family="Helvetica", size=15, weight="bold"),
+                command=lambda: radio_choice("Sec"),
+            )
+
+            sec_formula = ctk.CTkLabel(
+                master=input_frame,
+                width=100,
+                height=30,
+                text="y = Sec",
+                font=ctk.CTkFont(family="Helvetica", size=18, weight="normal"),
+            )
+
+            sec_entry = ctk.CTkEntry(
+                master=input_frame,
+                width=40,
+                height=30,
+                placeholder_text="0",
+                state="normal",
+            )
+
+            sec_x_label = ctk.CTkLabel(
+                master=input_frame,
+                text="x",
+                font=ctk.CTkFont(family="Helvetica", size=18, weight="normal"),
+            )
+
+            # Cotangen
+            cotan_button = ctk.CTkRadioButton(
+                master=input_frame,
+                radiobutton_width=20,
+                radiobutton_height=20,
+                text="Cotangen",
+                value="Cotan",
+                variable=fungsi_choice,
+                font=ctk.CTkFont(family="Helvetica", size=15, weight="bold"),
+                command=lambda: radio_choice("Cotan"),
+            )
+
+            cotan_formula = ctk.CTkLabel(
+                master=input_frame,
+                width=100,
+                height=30,
+                text="y = Cotan",
+                font=ctk.CTkFont(family="Helvetica", size=18, weight="normal"),
+            )
+
+            cotan_entry = ctk.CTkEntry(
+                master=input_frame,
+                width=40,
+                height=30,
+                placeholder_text="0",
+                state="normal",
+            )
+
+            cotan_x_label = ctk.CTkLabel(
+                master=input_frame,
+                text="x",
+                font=ctk.CTkFont(family="Helvetica", size=18, weight="normal"),
+            )
+
             # Label Placement
-            # pilih_text.grid(column=0, row=0,padx=15, pady=15)
             pilih_text.place(x=20, y=25, anchor="w")
 
             # Sinus
             sin_button.place(x=20, y=65, anchor="w")
             sin_formula.place(x=30, y=100, anchor="w")
-            sin_entry.place(x=120, y=100, anchor="w")
-            x_label1.place(x=170, y=100, anchor="w")
+            sin_entry.place(x=130, y=100, anchor="w")
+            sin_x_label.place(x=180, y=100, anchor="w")
 
             # Cosinus
             cos_button.place(x=20, y=145, anchor="w")
             cos_formula.place(x=30, y=180, anchor="w")
-            cos_entry.place(x=120, y=180, anchor="w")
-            x_label2.place(x=170, y=180, anchor="w")
+            cos_entry.place(x=130, y=180, anchor="w")
+            cos_x_label.place(x=180, y=180, anchor="w")
 
             # Tangent
             tan_button.place(x=20, y=225, anchor="w")
             tan_formula.place(x=30, y=260, anchor="w")
-            tan_entry.place(x=120, y=260, anchor="w")
-            x_label3.place(x=170, y=260, anchor="w")
+            tan_entry.place(x=130, y=260, anchor="w")
+            tan_x_label.place(x=180, y=260, anchor="w")
 
-        return input_frame(left_frame)
+            # Cosecan
+            cosec_button.place(x=20, y=305, anchor="w")
+            cosec_formula.place(x=30, y=340, anchor="w")
+            cosec_entry.place(x=130, y=340, anchor="w")
+            cosec_x_label.place(x=180, y=340, anchor="w")
+
+            # Secan
+            sec_button.place(x=20, y=385, anchor="w")
+            sec_formula.place(x=30, y=420, anchor="w")
+            sec_entry.place(x=130, y=420, anchor="w")
+            sec_x_label.place(x=180, y=420, anchor="w")
+
+            # Cotangen
+            cotan_button.place(x=20, y=465, anchor="w")
+            cotan_formula.place(x=30, y=500, anchor="w")
+            cotan_entry.place(x=130, y=500, anchor="w")
+            cotan_x_label.place(x=180, y=500, anchor="w")
+
+        return (input_frame(left_frame),)
 
     def graph_widgets():
         fig = Figure(figsize=(8, 4.5), dpi=100)
-        arange = np.arange(0, 3, 0.01)
-        fig.add_subplot(111).plot(arange, 2 * np.sin(2 * np.pi * arange))
-
         canvas = FigureCanvasTkAgg(fig, master=graph_frame)
+
+        # x_values = [0, 30, 45, 60, 90, 120, 135, 150, 180, 210, 225, 240, 270, 300, 315, 330, 360]
+        # x = np.radians(x_values)
+        x = np.arange(-3, 3, 0.01)
+        print(x)
+        y = np.sin(2 * np.pi * x)
+
+        axes = fig.add_subplot(111)
+        axes.plot(y)
+        axes.set_xlabel("Sudut Istimewa")
+        axes.grid(True)
+
         canvas.draw()
         canvas.get_tk_widget().place(relx=0.5, rely=0.5, anchor="center")
 
@@ -457,15 +602,15 @@ def fungsi_page():
             ],
             ["Sin", 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2],
         ]
-        table = CTkTable(
-            master=table_frame,
-            column=17,
-            row=2,
-            corner_radius=None,
-            font=ctk.CTkFont(family="Helvetica", size=15, weight="normal"),
-            values=value,
-        )
-        table.place(relx=0.5, rely=0.5, relwidth=0.9, relheight=0.35, anchor="center")
+        # table = CTkTable(
+        #     master=table_frame,
+        #     column=17,
+        #     row=2,
+        #     corner_radius=None,
+        #     font=ctk.CTkFont(family="Helvetica", size=15, weight="normal"),
+        #     values=value,
+        # )
+        # table.place(relx=0.5, rely=0.5, relwidth=0.9, relheight=0.35, anchor="center")
 
     return left_widgets()
 
