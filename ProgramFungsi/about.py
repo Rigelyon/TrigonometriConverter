@@ -1,8 +1,8 @@
 import customtkinter as ctk
 from PIL import Image
 
+# variable
 FONT = "Helvetica"
-
 authors = """
     Authors:
     1. Pandu Dwi Ashidiqi (237006105)
@@ -15,6 +15,10 @@ with open("license", "r") as file:
 
 
 class AboutPage(ctk.CTkFrame):
+    """
+    Halaman dari About. Class berbentuk frame untuk base frame. Children
+    berisi widgets berupa button untuk navigasi ke halaman lain.
+    """
     def __init__(self, master):
         super().__init__(master)
         self.grid(column=0, row=0, sticky="nsew")
@@ -63,6 +67,9 @@ class AboutPage(ctk.CTkFrame):
         )
 
     def create_widgets(self):
+        """
+        Method dari class AboutPage untuk memasang widgets dan frame
+        """
         self.about_frame.place(relx=0.5, rely=0.5, anchor="center")
         self.logo.place(x=130, y=65, anchor="center")
         self.title.place(x=310, y=65, anchor="center")
