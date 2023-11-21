@@ -23,7 +23,7 @@ class AboutPage(ctk.CTkFrame):
         super().__init__(master)
         self.grid(column=0, row=0, sticky="nsew")
         self.logo_image = ctk.CTkImage(
-            dark_image=Image.open("icon_white.png"), size=(70, 70)
+            dark_image=Image.open("Trigonometri Converter/Assets/icon_white.png"), size=(70, 70)
         )
         self.about_frame = ctk.CTkFrame(
             master=self,
@@ -58,7 +58,7 @@ class AboutPage(ctk.CTkFrame):
             master=self.about_frame,
             width=200,
             height=45,
-            text="Back",
+            text="Kembali",
             font=ctk.CTkFont(family=FONT, size=18, weight="normal"),
             command=lambda: master.show_page("FrontPage"),
         )

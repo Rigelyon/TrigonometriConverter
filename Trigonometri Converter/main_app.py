@@ -24,7 +24,7 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("Trigonometri Converter")
-        self.iconbitmap("icon_white.png")
+        self.iconbitmap("Trigonometri Converter/Assets/icon.ico")
         self.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}+0+0")
         self.minsize(WINDOW_WIDTH, WINDOW_HEIGHT)
         self.grid_columnconfigure(0, weight=1)
@@ -67,7 +67,7 @@ class FrontPage(ctk.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
         self.logo_image = ctk.CTkImage(
-            dark_image=Image.open("icon_white.png"), size=(150, 150)
+            dark_image=Image.open("Trigonometri Converter/Assets/icon_white.png"), size=(150, 150)
         )
         self.front_frame = ctk.CTkFrame(
             master=self,

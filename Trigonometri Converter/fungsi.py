@@ -4,6 +4,8 @@ from tkinter import messagebox as msgbox
 import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
+from matplotlib.backend_bases import MouseButton
+import matplotlib.ticker as ticker
 
 from trigonometri import Trigonometri
 
@@ -71,6 +73,8 @@ class FungsiPage(ctk.CTkFrame):
         self.graph_results = self.trig.graph_sin(0, 0, self.graph_x_ranges)
         self.func_title = "f(x) = "
 
+        self.bind("<Return>", print("Pressed"))
+
         # Konfigurasi grid untuk 3 frame untuk parent FungsiPage
         self.grid_columnconfigure((0, 1, 2, 3), weight=1, uniform="a", minsize=380)
         self.grid_rowconfigure((0, 1, 2), weight=1, uniform="a")
@@ -91,7 +95,7 @@ class FungsiPage(ctk.CTkFrame):
         )
         self.back_button = ctk.CTkButton(
             master=self.left_frame,
-            text="Back",
+            text="Kembali",
             width=120,
             height=40,
             font=ctk.CTkFont(family=FONT, size=15, weight="normal"),
@@ -223,6 +227,11 @@ class FungsiPage(ctk.CTkFrame):
         self.cotan.left_entry.configure(textvariable=self.cotan_l_entry)
         self.cotan.right_entry.configure(textvariable=self.cotan_r_entry)
 
+        self.coord_label = ctk.CTkLabel(
+            master=self.graph_frame,
+            font=ctk.CTkFont(family=FONT, size=13, weight="normal"),
+        )
+
     def enter_pressed(self):
         """
         Method untuk menjalankan command ketika tombol enter ditekan. Menghandle event berdasarkan pilihan
@@ -322,7 +331,6 @@ class FungsiPage(ctk.CTkFrame):
                 message="Pilih fungsi dahulu dengan menekan tombol lingkaran",
             )
 
-
     def create_widgets(self):
         """
         Method dari class FungsiPage untuk memasang widgets dan frame
@@ -350,17 +358,23 @@ class FungsiPage(ctk.CTkFrame):
         self.sec.pack(anchor="n", fill="x")
         self.cotan.pack(anchor="n", fill="x")
 
+    def on_mouse_hover(self, event):
+        if event.inaxes:
+            x, y = np.degrees(event.xdata), event.ydata
+            self.coord_label.configure(text=f"Coordinates: ({x:.2f}°,{y:.2f})")
+            self.coord_label.place(x=840, y=452, anchor="n")
+
     def display_graph(self):
         """
         Method untuk menampilkan grafik trigonometri
         """
-        if hasattr(self, 'canvas'):
+        if hasattr(self, "canvas"):
             self.canvas.get_tk_widget().destroy()
 
         x = self.graph_x_ranges
         y = self.graph_results
 
-        fig = Figure(figsize=(8, 4.3), dpi=100)
+        fig = Figure(figsize=(9, 4.8), dpi=100)
         self.canvas = FigureCanvasTkAgg(fig, master=self.graph_frame)
 
         self.axes = fig.add_subplot(
@@ -375,11 +389,22 @@ class FungsiPage(ctk.CTkFrame):
         else:
             self.axes.set_autoscaley_on = True
 
+        # Mengubah radians menjadi derajat untuk label sumbu-x
+        degree_formatter = ticker.FuncFormatter(lambda x, _: f"{int(np.degrees(x))}°")
+        self.axes.xaxis.set_major_formatter(degree_formatter)
+
+        # Memasang label untuk sumbu-x
+        self.axes.set_xticks(np.radians(self.x_ranges))
+        self.axes.set_xticklabels(
+            [f"{deg}°" for deg in self.x_ranges], rotation=45, ha="right"
+        )
+
         self.axes.plot(x, y)
         self.axes.grid(True)
 
         self.canvas.draw()
         self.canvas.get_tk_widget().place(relx=0.5, y=85, anchor="n")
+        self.canvas.mpl_connect("motion_notify_event", self.on_mouse_hover)
 
         self.graph_title.place(relx=0.5, y=40, anchor="center")
 
@@ -387,7 +412,7 @@ class FungsiPage(ctk.CTkFrame):
         """
         Method untuk menampilkan tabel trigonometri dari sudut istimewa
         """
-        if hasattr(self, 'table'):
+        if hasattr(self, "table"):
             self.table.destroy()
 
         value = [
@@ -498,7 +523,10 @@ class TrigEquation(ctk.CTkFrame):
         self.x_label.place(x=240, y=50, anchor="w")
 
     def validate_input(self, new_value):
-        if all(char.isdigit() or (char == "-" and new_value.count("-") == 1) for char in new_value):
+        if all(
+            char.isdigit() or (char == "-" and new_value.count("-") == 1)
+            for char in new_value
+        ):
             return len(new_value) <= 3
         else:
             return False
