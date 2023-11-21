@@ -31,7 +31,7 @@ class App(ctk.CTk):
         self.grid_rowconfigure(0, weight=1)
 
         # Halaman yang ingin ditampilkan pertama kali ketika program dijalankan
-        self.current_page = FungsiPage(self)
+        self.current_page = FrontPage(self)
         self.current_page.create_widgets()
         
     def show_page(self, page_name):
@@ -92,7 +92,7 @@ class FrontPage(ctk.CTkFrame):
             master=self.front_frame,
             width=200,
             height=45,
-            text="Start",
+            text="Mulai",
             font=ctk.CTkFont(family=FONT, size=18, weight="normal"),
             command=lambda: App.show_page(master, "FungsiPage"),
         )
@@ -100,14 +100,14 @@ class FrontPage(ctk.CTkFrame):
             master=self.front_frame,
             width=200,
             height=45,
-            text="How to Use",
+            text="Materi",
             font=ctk.CTkFont(family=FONT, size=18, weight="normal"),
         )
         self.about_button = ctk.CTkButton(
             master=self.front_frame,
             width=200,
             height=45,
-            text="About",
+            text="Tentang Kami",
             font=ctk.CTkFont(family=FONT, size=18, weight="normal"),
             command=lambda: App.show_page(master, "AboutPage"),
         )

@@ -44,7 +44,6 @@ class FungsiPage(ctk.CTkFrame):
         self.cotan_r_entry = ctk.IntVar()
 
         # Variable untuk menentukan range dari X-Axis
-        # self.x_ranges = np.arange(-5, 5, 0.01)
         self.x_ranges = (
             0,
             30,
@@ -70,6 +69,7 @@ class FungsiPage(ctk.CTkFrame):
         self.trig = Trigonometri()
         self.table_results = self.trig.table_sin(0, 0, self.x_ranges)
         self.graph_results = self.trig.graph_sin(0, 0, self.graph_x_ranges)
+        self.func_title = "f(x) = "
 
         # Konfigurasi grid untuk 3 frame untuk parent FungsiPage
         self.grid_columnconfigure((0, 1, 2, 3), weight=1, uniform="a", minsize=380)
@@ -228,6 +228,7 @@ class FungsiPage(ctk.CTkFrame):
         Method untuk menjalankan command ketika tombol enter ditekan. Menghandle event berdasarkan pilihan
         fungsi trigonometri yang dipilih.
         """
+
         if self.trig_var.get() != "":
             match self.trig_var.get():
                 case "sin":
@@ -252,8 +253,8 @@ class FungsiPage(ctk.CTkFrame):
                     )
                     # Memasukkan nilai untuk argumen grafik
                     self.graph_results = self.trig.graph_cos(
-                        self.sin_l_entry.get(),
-                        self.sin_r_entry.get(),
+                        self.cos_l_entry.get(),
+                        self.cos_r_entry.get(),
                         self.graph_x_ranges,
                     )
                 case "tan":
@@ -265,8 +266,8 @@ class FungsiPage(ctk.CTkFrame):
                     )
                     # Memasukkan nilai untuk argumen grafik
                     self.graph_results = self.trig.graph_tan(
-                        self.sin_l_entry.get(),
-                        self.sin_r_entry.get(),
+                        self.tan_l_entry.get(),
+                        self.tan_r_entry.get(),
                         self.graph_x_ranges,
                     )
 
@@ -281,8 +282,8 @@ class FungsiPage(ctk.CTkFrame):
                     )
                     # Memasukkan nilai untuk argumen grafik
                     self.graph_results = self.trig.graph_cosec(
-                        self.sin_l_entry.get(),
-                        self.sin_r_entry.get(),
+                        self.cosec_l_entry.get(),
+                        self.cosec_r_entry.get(),
                         self.graph_x_ranges,
                     )
                 case "sec":
@@ -294,8 +295,8 @@ class FungsiPage(ctk.CTkFrame):
                     )
                     # Memasukkan nilai untuk argumen grafik
                     self.graph_results = self.trig.graph_sec(
-                        self.sin_l_entry.get(),
-                        self.sin_r_entry.get(),
+                        self.sec_l_entry.get(),
+                        self.sec_r_entry.get(),
                         self.graph_x_ranges,
                     )
                 case "cotan":
@@ -309,8 +310,8 @@ class FungsiPage(ctk.CTkFrame):
                     )
                     # Memasukkan nilai untuk argumen grafik
                     self.graph_results = self.trig.graph_cotan(
-                        self.sin_l_entry.get(),
-                        self.sin_r_entry.get(),
+                        self.cotan_l_entry.get(),
+                        self.cotan_r_entry.get(),
                         self.graph_x_ranges,
                     )
             self.display_graph()
@@ -320,6 +321,7 @@ class FungsiPage(ctk.CTkFrame):
                 title="Info",
                 message="Pilih fungsi dahulu dengan menekan tombol lingkaran",
             )
+
 
     def create_widgets(self):
         """
@@ -336,8 +338,6 @@ class FungsiPage(ctk.CTkFrame):
             column=1, row=0, padx=10, pady=10, columnspan=3, rowspan=2, sticky="nsew"
         )
         self.left_title.place(relx=0.5, y=40, anchor="center")
-        self.graph_title.place(relx=0.5, y=40, anchor="center")
-        self.table_title.place(relx=0.5, y=40, anchor="center")
         self.back_button.place(relx=0.05, rely=0.95, anchor="w")
         self.enter_button.place(relx=0.95, rely=0.95, anchor="e")
         self.input_frame.grid(column=0, row=0, padx=20, pady=100, sticky="nsew")
@@ -354,34 +354,42 @@ class FungsiPage(ctk.CTkFrame):
         """
         Method untuk menampilkan grafik trigonometri
         """
+        if hasattr(self, 'canvas'):
+            self.canvas.get_tk_widget().destroy()
+
         x = self.graph_x_ranges
         y = self.graph_results
 
         fig = Figure(figsize=(8, 4.3), dpi=100)
-        canvas = FigureCanvasTkAgg(fig, master=self.graph_frame)
-
-        # fig, ax = plt.subplots()
+        self.canvas = FigureCanvasTkAgg(fig, master=self.graph_frame)
 
         self.axes = fig.add_subplot(
             111,
             title=self.func_title,
             xlabel="α",
             ylabel="f(x)",
-            autoscaley_on=True,
         )
+
+        if self.trig_var.get() in ["tan", "cosec", "sec", "cotan"]:
+            self.axes.set_ylim(-11, 11)
+        else:
+            self.axes.set_autoscaley_on = True
+
         self.axes.plot(x, y)
         self.axes.grid(True)
-        if self.trig_var.get() == "tan" or "cosec" or "sec" or "cotan":
-            print(self.trig_var.get())
-            self.axes.set_ylim(-5,5, auto=True)
 
-        canvas.draw()
-        canvas.get_tk_widget().place(relx=0.5, y=85, anchor="n")
+        self.canvas.draw()
+        self.canvas.get_tk_widget().place(relx=0.5, y=85, anchor="n")
+
+        self.graph_title.place(relx=0.5, y=40, anchor="center")
 
     def display_table(self):
         """
         Method untuk menampilkan tabel trigonometri dari sudut istimewa
         """
+        if hasattr(self, 'table'):
+            self.table.destroy()
+
         value = [
             [
                 "α",
@@ -406,15 +414,17 @@ class FungsiPage(ctk.CTkFrame):
             self.table_results,
         ]
 
-        table = CTkTable(
+        self.table = CTkTable(
             master=self.table_frame,
             column=18,
             row=2,
             corner_radius=None,
-            font=ctk.CTkFont(family="Helvetica", size=15, weight="normal"),
+            font=ctk.CTkFont(family="Helvetica", size=13, weight="normal"),
             values=value,
         )
-        table.place(relx=0.5, y=85, relwidth=0.9, relheight=0.25, anchor="n")
+        self.table.place(relx=0.5, y=85, relwidth=0.9, relheight=0.25, anchor="n")
+
+        self.table_title.place(relx=0.5, y=40, anchor="center")
 
 
 class TrigEquation(ctk.CTkFrame):
@@ -488,7 +498,7 @@ class TrigEquation(ctk.CTkFrame):
         self.x_label.place(x=240, y=50, anchor="w")
 
     def validate_input(self, new_value):
-        if new_value.isdigit() or new_value == "":
+        if all(char.isdigit() or (char == "-" and new_value.count("-") == 1) for char in new_value):
             return len(new_value) <= 3
         else:
             return False
