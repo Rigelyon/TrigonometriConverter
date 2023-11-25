@@ -50,6 +50,7 @@ class MateriPage(ctk.CTkFrame):
         self.page_title = ctk.CTkLabel(self.header_frame, text="MATERI TRIGONOMETRI", justify="left", wraplength=300,
             text_color=COLORS[10], font=ctk.CTkFont(family=FONT, size=33, weight="bold"))
 
+        # Button
         self.current_page = PageOne(self, app=self.master)
         self.current_page.create_widgets()
         
@@ -75,7 +76,7 @@ class MateriPage(ctk.CTkFrame):
 
     def create_widgets(self):
         """
-        Method dari class AboutPage untuk memasang widgets dan frame
+        Method dari class MateriPage untuk memasang widgets dan frame
         """
         self.header_frame.place(relx=0.5, y=20, relwidth=0.85, anchor="n")
         self.page_title.place(relx=0.05, rely=0.5, anchor="w")
@@ -98,7 +99,7 @@ y = BC = panjang sisi tegak segitiga;
 r = AC = panjang sisi miring atau sisi terpanjang segitiga; 
 dan = besarnya sudut yang dibentuk oleh sisi-sisi segitiga.
         """
-
+        # First page content
         self.trigonometri_frame = ctk.CTkFrame(master=self, width=600,
             corner_radius=30, border_width=None, border_color=COLORS[4], fg_color="white")
         self.trigonometri_label = ctk.CTkLabel(master=self.trigonometri_frame, width=550, height=35, text="Trigonometri", 
@@ -109,6 +110,7 @@ dan = besarnya sudut yang dibentuk oleh sisi-sisi segitiga.
         self.triangle_image = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\triangle_image.png")), size=(300,280))
         self.triangle_image_label = ctk.CTkLabel(master=self, image=self.triangle_image, text=None)
 
+        # Button
         self.arrow_icon = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\arrow.png")), size=(40,20))
         self.arrow_icon_flip = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\arrow_flip.png")), size=(40,20))
         self.back_button = ctk.CTkButton(master=self, width=200, height=45, text=None,
@@ -126,7 +128,7 @@ dan = besarnya sudut yang dibentuk oleh sisi-sisi segitiga.
         self.trigonometri_frame.place(relx=0.97, rely=0.5, relheight=0.87, anchor="e")
         self.trigonometri_label.place(relx=0.5, y=0, anchor="n")
         self.trigonometri_text.place(relx=0.5, y=65, relwidth=0.95, relheight=0.7, anchor="n")
-        self.triangle_image_label.place(x=300, y=220, anchor="center")
+        self.triangle_image_label.place(relx=0.2, y=220, anchor="center")
     
         self.back_button.place(relx=0.03, rely=0.90, anchor="w")
         self.next_button.place(relx=0.97, rely=0.90, anchor="e")
@@ -145,7 +147,7 @@ class PageTwo(ctk.CTkFrame):
         """
         tan_text = """Tangen atau biasa disebut tan adalah perbandingan antara panjang sisi di depan sudut dan panjang sisi di samping sudut. Secara matematis, dirumuskan sebagai berikut.
         """
-
+        # Sin content
         self.sin_frame = ctk.CTkFrame(master=self, width=600,
             corner_radius=30, border_width=None, border_color=COLORS[4], fg_color="white")
         self.sin_label = ctk.CTkLabel(master=self.sin_frame, width=550, height=35, text="Sinus", 
@@ -156,6 +158,7 @@ class PageTwo(ctk.CTkFrame):
         self.sin_equation = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\sin_equation.png")), size=(160*1.3,60*1.3))
         self.sin_equation_label = ctk.CTkLabel(master=self.sin_frame, image=self.sin_equation, text=None)
 
+        # Cos content
         self.cos_frame = ctk.CTkFrame(master=self, width=600,
             corner_radius=30, border_width=None, border_color=COLORS[4], fg_color="white")
         self.cos_label = ctk.CTkLabel(master=self.cos_frame, width=550, height=35, text="Cosinus", 
@@ -166,6 +169,7 @@ class PageTwo(ctk.CTkFrame):
         self.cos_equation = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\cos_equation.png")), size=(160*1.3,60*1.3))
         self.cos_equation_label = ctk.CTkLabel(master=self.cos_frame, image=self.cos_equation, text=None)
 
+        # Tan content
         self.tan_frame = ctk.CTkFrame(master=self, width=600,
             corner_radius=30, border_width=None, border_color=COLORS[4], fg_color="white")
         self.tan_label = ctk.CTkLabel(master=self.tan_frame, width=550, height=35, text="Tangen", 
@@ -176,8 +180,7 @@ class PageTwo(ctk.CTkFrame):
         self.tan_equation = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\tan_equation.png")), size=(160*1.3,60*1.3))
         self.tan_equation_label = ctk.CTkLabel(master=self.tan_frame, image=self.tan_equation, text=None)
         
-
-
+        # Button
         self.arrow_icon = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\arrow.png")), size=(40,20))
         self.arrow_icon_flip = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\arrow_flip.png")), size=(40,20))
         self.back_button = ctk.CTkButton(master=self, width=200, height=45, text=None,
@@ -195,17 +198,17 @@ class PageTwo(ctk.CTkFrame):
         self.sin_frame.grid(column=0, row=0, padx=10, pady=35, sticky="nsew")
         self.sin_label.place(relx=0.5, y=0, relwidth=0.8, anchor="n")
         self.sin_text.place(relx=0.5, y=65, relwidth=0.95, relheight=0.7, anchor="n")
-        self.sin_equation_label.place(relx=0.5, y=300, anchor="center")
+        self.sin_equation_label.place(relx=0.5, y=250, anchor="center")
 
         self.cos_frame.grid(column=1, row=0, padx=10, pady=35, sticky="nsew")
         self.cos_label.place(relx=0.5, y=0, relwidth=0.8, anchor="n")
         self.cos_text.place(relx=0.5, y=65, relwidth=0.95, relheight=0.7, anchor="n")
-        self.cos_equation_label.place(relx=0.5, y=300, anchor="center")
+        self.cos_equation_label.place(relx=0.5, y=250, anchor="center")
 
         self.tan_frame.grid(column=2, row=0, padx=10, pady=35, sticky="nsew")
         self.tan_label.place(relx=0.5, y=0, relwidth=0.8, anchor="n")
         self.tan_text.place(relx=0.5, y=65, relwidth=0.95, relheight=0.7, anchor="n")
-        self.tan_equation_label.place(relx=0.5, y=300, anchor="center")
+        self.tan_equation_label.place(relx=0.5, y=250, anchor="center")
 
         self.back_button.place(relx=0.03, rely=0.90, anchor="w")
         self.next_button.place(relx=0.97, rely=0.90, anchor="e")
@@ -224,7 +227,7 @@ class PageThree(ctk.CTkFrame):
         """
         cotan_text = """Kotangen adalah perbandingan antara panjang sisi di samping sudut dan panjang sisi di depan sudut. Kotangen merupakan kebalikan dari tangen yang secara matematis, dirumuskan sebagai berikut.
         """
-
+        # Cosec content
         self.cosec_frame = ctk.CTkFrame(master=self, width=600,
             corner_radius=30, border_width=None, border_color=COLORS[4], fg_color="white")
         self.cosec_label = ctk.CTkLabel(master=self.cosec_frame, width=550, height=35, text="Cosecan", 
@@ -235,6 +238,7 @@ class PageThree(ctk.CTkFrame):
         self.cosec_equation = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\cosec_equation.png")), size=(160*1.3,65*1.3))
         self.cosec_equation_label = ctk.CTkLabel(master=self.cosec_frame, image=self.cosec_equation, text=None)
 
+        # Sec content
         self.sec_frame = ctk.CTkFrame(master=self, width=600,
             corner_radius=30, border_width=None, border_color=COLORS[4], fg_color="white")
         self.sec_label = ctk.CTkLabel(master=self.sec_frame, width=550, height=35, text="Secan", 
@@ -245,6 +249,7 @@ class PageThree(ctk.CTkFrame):
         self.sec_equation = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\sec_equation.png")), size=(160*1.3,65*1.3))
         self.sec_equation_label = ctk.CTkLabel(master=self.sec_frame, image=self.sec_equation, text=None)
 
+        # Cotan content
         self.cotan_frame = ctk.CTkFrame(master=self, width=600,
             corner_radius=30, border_width=None, border_color=COLORS[4], fg_color="white")
         self.cotan_label = ctk.CTkLabel(master=self.cotan_frame, width=550, height=35, text="Cotangen", 
@@ -255,6 +260,7 @@ class PageThree(ctk.CTkFrame):
         self.cotan_equation = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\cotan_equation.png")), size=(160*1.3,65*1.3))
         self.cotan_equation_label = ctk.CTkLabel(master=self.cotan_frame, image=self.cotan_equation, text=None)
 
+        # Button
         self.arrow_icon = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\arrow.png")), size=(40,20))
         self.arrow_icon_flip = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\arrow_flip.png")), size=(40,20))
         self.back_button = ctk.CTkButton(master=self, width=200, height=45, text=None,
@@ -275,17 +281,17 @@ class PageThree(ctk.CTkFrame):
         self.cosec_frame.grid(column=0, row=0, padx=10, pady=35, sticky="nsew")
         self.cosec_label.place(relx=0.5, y=0, relwidth=0.8, anchor="n")
         self.cosec_text.place(relx=0.5, y=65, relwidth=0.95, relheight=0.7, anchor="n")
-        self.cosec_equation_label.place(relx=0.5, y=300, anchor="center")
+        self.cosec_equation_label.place(relx=0.5, y=250, anchor="center")
 
         self.sec_frame.grid(column=1, row=0, padx=10, pady=35, sticky="nsew")
         self.sec_label.place(relx=0.5, y=0, relwidth=0.8, anchor="n")
         self.sec_text.place(relx=0.5, y=65, relwidth=0.95, relheight=0.7, anchor="n")
-        self.sec_equation_label.place(relx=0.5, y=300, anchor="center")
+        self.sec_equation_label.place(relx=0.5, y=250, anchor="center")
 
         self.cotan_frame.grid(column=2, row=0, padx=10, pady=35, sticky="nsew")
         self.cotan_label.place(relx=0.5, y=0, relwidth=0.8, anchor="n")
         self.cotan_text.place(relx=0.5, y=65, relwidth=0.95, relheight=0.7, anchor="n")
-        self.cotan_equation_label.place(relx=0.5, y=300, anchor="center")
+        self.cotan_equation_label.place(relx=0.5, y=250, anchor="center")
 
         self.back_button.place(relx=0.03, rely=0.90, anchor="w")
         # self.next_button.place(relx=0.97, rely=0.90, anchor="e")

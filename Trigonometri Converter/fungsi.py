@@ -12,7 +12,7 @@ import matplotlib.ticker as ticker
 from trigonometri import Trigonometri
 
 
-# Variable
+# Const
 FONT = "Helvetica"
 COLORS = {
     0:"#f0f7ff",
@@ -43,43 +43,37 @@ class FungsiPage(ctk.CTkFrame):
     Halaman dari program trigonometri. Class berbentuk frame untuk base frame. Children
     berisi widgets berupa button untuk navigasi ke halaman lain.
     """
-
     def __init__(self, master=None):
         super().__init__(master)
-        # Variable untuk mengontrol radio button
+        # Variable untuk menyimpan value radio button
         self.trig_var = ctk.StringVar()
 
-        # Variable untuk mengakses entry pilihan
-        self.sin_l_entry = ctk.IntVar()
-        self.sin_r_entry = ctk.IntVar()
-        self.cos_l_entry = ctk.IntVar()
-        self.cos_r_entry = ctk.IntVar()
-        self.tan_l_entry = ctk.IntVar()
-        self.tan_r_entry = ctk.IntVar()
-        self.cosec_l_entry = ctk.IntVar()
-        self.cosec_r_entry = ctk.IntVar()
-        self.sec_l_entry = ctk.IntVar()
-        self.sec_r_entry = ctk.IntVar()
-        self.cotan_l_entry = ctk.IntVar()
-        self.cotan_r_entry = ctk.IntVar()
+        # Variable untuk mengakses entry 
+        self.sin_entries = [ctk.IntVar(), ctk.IntVar()]
+        self.cos_entries = [ctk.IntVar(), ctk.IntVar()]
+        self.tan_entries = [ctk.IntVar(), ctk.IntVar()]
+        self.cosec_entries = [ctk.IntVar(), ctk.IntVar()]
+        self.sec_entries = [ctk.IntVar(), ctk.IntVar()]
+        self.cotan_entries = [ctk.IntVar(), ctk.IntVar()]
 
         # Variable untuk menentukan range dari X-Axis
         self.x_ranges = (0, 30, 45, 60, 90, 120, 135, 150, 180, 210, 225, 240, 270, 300, 315, 330, 360)
         self.graph_x_ranges = np.radians(np.arange(0, 360, 0.1))
 
-        # Default variables
+        # Variable default jika nilai tidak dimasukkan
         self.trig = Trigonometri()
         self.table_results = self.trig.table_sin(0, 0, self.x_ranges)
         self.graph_results = self.trig.graph_sin(0, 0, self.graph_x_ranges)
         self.func_title = "f(x) = "
 
-        # Konfigurasi grid untuk 3 frame untuk parent FungsiPage
-        self.grid_columnconfigure((0, 1, 2, 3), weight=1, uniform="a", minsize=380)
+        # Konfigurasi grid dengan 4 column dan 3 row
+        self.grid_columnconfigure((0, 1, 2, 3), weight=1, uniform="a")
         self.grid_rowconfigure((0, 1, 2), weight=1, uniform="a")
 
+        # Konfigurasi warna background
         self.configure(fg_color=COLORS[1])
 
-        # Frame untuk menempatkan fungsi
+        # Frame bagian kiri
         self.left_frame = ctk.CTkFrame(master=self, width=380, border_width=4, corner_radius=30, bg_color="transparent",
             fg_color="White", border_color=COLORS[4])
         self.left_frame.grid_columnconfigure(0, weight=1)
@@ -115,132 +109,92 @@ class FungsiPage(ctk.CTkFrame):
         self.pilih_text = ctk.CTkLabel(master=self.left_frame, text="Pilih fungsi Trigonometri:", text_color="black",
             font=ctk.CTkFont(family=FONT, size=18, weight="normal"))
             
-        self.sin = TrigEquation(
-            master=self.input_frame,
-            page=self,
-            width=250,
-            height=73,
-            name="Sinus",
-            value="sin",
-            equation="Sin",
-        )
-        self.sin.left_entry.configure(textvariable=self.sin_l_entry)
-        self.sin.right_entry.configure(textvariable=self.sin_r_entry)
-        self.cos = TrigEquation(
-            master=self.input_frame,
-            page=self,
-            width=250,
-            height=73,
-            name="Cosinus",
-            value="cos",
-            equation="Cos",
-        )
-        self.cos.left_entry.configure(textvariable=self.cos_l_entry)
-        self.cos.right_entry.configure(textvariable=self.cos_r_entry)
-        self.tan = TrigEquation(
-            master=self.input_frame,
-            page=self,
-            width=250,
-            height=73,
-            name="Tangen",
-            value="tan",
-            equation="Tan",
-        )
-        self.tan.left_entry.configure(textvariable=self.tan_l_entry)
-        self.tan.right_entry.configure(textvariable=self.tan_r_entry)
-        self.cosec = TrigEquation(
-            master=self.input_frame,
-            page=self,
-            width=250,
-            height=73,
-            name="Cosecan",
-            value="cosec",
-            equation="Cosec",
-        )
-        self.cosec.left_entry.configure(textvariable=self.cosec_l_entry)
-        self.cosec.right_entry.configure(textvariable=self.cosec_r_entry)
-        self.sec = TrigEquation(
-            master=self.input_frame,
-            page=self,
-            width=250,
-            height=73,
-            name="Secan",
-            value="sec",
-            equation="Secan",
-        )
-        self.sec.left_entry.configure(textvariable=self.sec_l_entry)
-        self.sec.right_entry.configure(textvariable=self.sec_r_entry)
-        self.cotan = TrigEquation(
-            master=self.input_frame,
-            page=self,
-            width=250,
-            height=73,
-            name="Cotan",
-            value="cotan",
-            equation="Cotan",
-        )
-        self.cotan.left_entry.configure(textvariable=self.cotan_l_entry)
-        self.cotan.right_entry.configure(textvariable=self.cotan_r_entry)
+        # Generate content berisi button, entry, label untuk pilihan Fungsi Trigonometri
+        # Content dibuat dengan class TrigEquation()
+        self.sin = TrigEquation(master=self.input_frame, page=self, width=250, height=73, name="Sinus",
+            value="sin", equation="Sin")
+        self.sin.left_entry.configure(textvariable=self.sin_entries[0])
+        self.sin.right_entry.configure(textvariable=self.sin_entries[1])
+        self.cos = TrigEquation(master=self.input_frame, page=self, width=250, height=73, name="Cosinus",
+            value="cos", equation="Cos")
+        self.cos.left_entry.configure(textvariable=self.cos_entries[0])
+        self.cos.right_entry.configure(textvariable=self.cos_entries[1])
+        self.tan = TrigEquation(master=self.input_frame, page=self, width=250, height=73, name="Tangen",
+            value="tan",equation="Tan")
+        self.tan.left_entry.configure(textvariable=self.tan_entries[0])
+        self.tan.right_entry.configure(textvariable=self.tan_entries[1])
+        self.cosec = TrigEquation(master=self.input_frame, page=self, width=250, height=73, name="Cosecan",
+            value="cosec",equation="Cosec")
+        self.cosec.left_entry.configure(textvariable=self.cosec_entries[0])
+        self.cosec.right_entry.configure(textvariable=self.cosec_entries[1])
+        self.sec = TrigEquation(master=self.input_frame, page=self, width=250, height=73, name="Secan",
+            value="sec", equation="Secan")
+        self.sec.left_entry.configure(textvariable=self.sec_entries[0])
+        self.sec.right_entry.configure(textvariable=self.sec_entries[1])
+        self.cotan = TrigEquation(master=self.input_frame, page=self, width=250, height=73, name="Cotan",
+            value="cotan", equation="Cotan")
+        self.cotan.left_entry.configure(textvariable=self.cotan_entries[0])
+        self.cotan.right_entry.configure(textvariable=self.cotan_entries[1])
 
-        self.coord_label = ctk.CTkLabel(
-            master=self.graph_frame,
-            font=ctk.CTkFont(family=FONT, size=13, weight="normal"),
-        )
+        self.coord_label = ctk.CTkLabel(master=self.graph_frame, font=ctk.CTkFont(family=FONT, size=13, weight="normal"))
 
     def enter_pressed(self):
         """
         Method untuk menjalankan command ketika tombol enter ditekan. Menghandle event berdasarkan pilihan
-        fungsi trigonometri yang dipilih.
+        dari fungsi trigonometri yang dipilih.
         """
 
         if self.trig_var.get() != "":
             match self.trig_var.get():
                 case "sin":
                     # Memasukkan judul fungsi
-                    self.func_title = f"f(x) = {self.sin_l_entry.get()} Sin {self.sin_r_entry.get()} x"
+                    self.func_title = f"f(x) = {self.sin_entries[0].get()} Sin {self.sin_entries[1].get()} x"
                     # Memasukkan nilai untuk argumen tabel
-                    self.table_results = self.trig.table_sin(self.sin_l_entry.get(), self.sin_r_entry.get(), self.x_ranges)
+                    self.table_results = self.trig.table_sin(self.sin_entries[0].get(), self.sin_entries[1].get(), self.x_ranges)
                     # Memasukkan nilai untuk argumen grafik
-                    self.graph_results = self.trig.graph_sin(self.sin_l_entry.get(), self.sin_r_entry.get(), self.graph_x_ranges)
+                    self.graph_results = self.trig.graph_sin(self.sin_entries[0].get(), self.sin_entries[1].get(), self.graph_x_ranges)
                 case "cos":
                     # Memasukkan judul fungsi
-                    self.func_title = f"f(x) = {self.cos_l_entry.get()} Cos {self.cos_r_entry.get()} x"
+                    self.func_title = f"f(x) = {self.cos_entries[0].get()} Cos {self.cos_entries[1].get()} x"
                     # Memasukkan nilai untuk argumen tabel
-                    self.table_results = self.trig.table_cos(self.cos_l_entry.get(), self.cos_r_entry.get(), self.x_ranges)
+                    self.table_results = self.trig.table_cos(self.cos_entries[0].get(), self.cos_entries[1].get(), self.x_ranges)
                     # Memasukkan nilai untuk argumen grafik
-                    self.graph_results = self.trig.graph_cos(self.cos_l_entry.get(), self.cos_r_entry.get(), self.graph_x_ranges)
+                    self.graph_results = self.trig.graph_cos(self.cos_entries[0].get(), self.cos_entries[1].get(), self.graph_x_ranges)
                 case "tan":
                     # Memasukkan judul fungsi
-                    self.func_title = f"f(x) = {self.tan_l_entry.get()} Tan {self.tan_r_entry.get()} x"
+                    self.func_title = f"f(x) = {self.tan_entries[0].get()} Tan {self.tan_entries[0].get()} x"
                     # Memasukkan nilai untuk argumen tabel
-                    self.table_results = self.trig.table_tan(self.tan_l_entry.get(), self.tan_r_entry.get(), self.x_ranges)
+                    self.table_results = self.trig.table_tan(self.tan_entries[0].get(), self.tan_entries[1].get(), self.x_ranges)
                     # Memasukkan nilai untuk argumen grafik
-                    self.graph_results = self.trig.graph_tan(self.tan_l_entry.get(), self.tan_r_entry.get(), self.graph_x_ranges)
+                    self.graph_results = self.trig.graph_tan(self.tan_entries[0].get(), self.tan_entries[1].get(), self.graph_x_ranges)
 
                 case "cosec":
                     # Memasukkan judul fungsi
-                    self.func_title = f"f(x) = {self.cosec_l_entry.get()} Cosec {self.cosec_r_entry.get()} x"
+                    self.func_title = f"f(x) = {self.cosec_entries[0].get()} Cosec {self.cosec_entries[1].get()} x"
                     # Memasukkan nilai untuk argumen tabel
-                    self.table_results = self.trig.table_cosec( self.cosec_l_entry.get(), self.cosec_r_entry.get(), self.x_ranges)
+                    self.table_results = self.trig.table_cosec(self.cosec_entries[0].get(), self.cosec_entries[1].get(), self.x_ranges)
                     # Memasukkan nilai untuk argumen grafik
-                    self.graph_results = self.trig.graph_cosec(self.cosec_l_entry.get(), self.cosec_r_entry.get(), self.graph_x_ranges)
+                    self.graph_results = self.trig.graph_cosec(self.cosec_entries[0].get(), self.cosec_entries[1].get(), self.graph_x_ranges)
                 case "sec":
                     # Memasukkan judul fungsi
-                    self.func_title = f"f(x) = {self.sec_l_entry.get()} Sec {self.sec_r_entry.get()} x"
+                    self.func_title = f"f(x) = {self.sec_entries[0].get()} Sec {self.sec_entries[1].get()} x"
                     # Memasukkan nilai untuk argumen tabel
-                    self.table_results = self.trig.table_sec(self.sec_l_entry.get(), self.sec_r_entry.get(), self.x_ranges)
+                    self.table_results = self.trig.table_sec(self.sec_entries[0].get(), self.sec_entries[1].get(), self.x_ranges)
                     # Memasukkan nilai untuk argumen grafik
-                    self.graph_results = self.trig.graph_sec(self.sec_l_entry.get(), self.sec_r_entry.get(), self.graph_x_ranges)
+                    self.graph_results = self.trig.graph_sec(self.sec_entries[0].get(), self.sec_entries[1].get(), self.graph_x_ranges)
                 case "cotan":
                     # Memasukkan judul fungsi
-                    self.func_title = f"f(x) = {self.cotan_l_entry.get()} Cotan {self.cotan_r_entry.get()} x"
+                    self.func_title = f"f(x) = {self.cotan_entries[0].get()} Cotan {self.cotan_entries[1]} x"
                     # Memasukkan nilai untuk argumen tabel
-                    self.table_results = self.trig.table_cotan(self.cotan_l_entry.get(), self.cotan_r_entry.get(), self.x_ranges)
+                    self.table_results = self.trig.table_cotan(self.cotan_entries[0].get(), self.cotan_entries[1].get(), self.x_ranges)
                     # Memasukkan nilai untuk argumen grafik
-                    self.graph_results = self.trig.graph_cotan(self.cotan_l_entry.get(), self.cotan_r_entry.get(), self.graph_x_ranges)
+                    self.graph_results = self.trig.graph_cotan(self.cotan_entries[0].get(), self.cotan_entries[1].get(), self.graph_x_ranges)
+            # Menampilkan grafik dan tabel
+            self.check_screen_resolution()
             self.display_graph()
             self.display_table()
         else:
+            # Raise error jika radio button belum dipilih
             msgbox.showinfo(title="Info", message="Pilih fungsi dahulu dengan menekan tombol lingkaran")
 
     def create_widgets(self):
@@ -264,27 +218,40 @@ class FungsiPage(ctk.CTkFrame):
         self.sec.pack(anchor="n", fill="x")
         self.cotan.pack(anchor="n", fill="x")
 
+    def check_screen_resolution(self):
+        screen_width = self.master.winfo_screenwidth()
+        screen_height = self.master.winfo_screenheight()
+        match (screen_width, screen_height):
+            case (1920, 1080):
+                self.figure_size = [9, 4.8, 100]
+            case (1366, 768):
+                self.figure_size = [6, 3.2, 80]
+    
     def on_mouse_hover(self, event):
+        """Method untuk menampilkan koordinat ketika mouse hover di canvas grafik"""
         if event.inaxes:
             x, y = np.degrees(event.xdata), event.ydata
             self.coord_label.configure(text=f"Coordinates: ({x:.2f}°,{y:.2f})", text_color="black")
-            self.coord_label.place(relx=0.5, y=460, anchor="n")
+            self.coord_label.place(relx=0.5, rely=0.9, anchor="n")
 
     def display_graph(self):
         """
         Method untuk menampilkan grafik trigonometri
         """
+        # Memeriksa apakah widgets sudah dibuat, jika sudah akan dihancurkan untuk dibuat ulang
         if hasattr(self, "canvas"):
             self.canvas.get_tk_widget().destroy()
 
+        # Variable x dan y
         x = self.graph_x_ranges
         y = self.graph_results
 
-        fig = Figure(figsize=(9, 4.8), dpi=100)
+        # Konfigurasi canvas untuk grafik
+        fig = Figure(figsize=(self.figure_size[0], self.figure_size[1]), dpi=self.figure_size[2])
         self.canvas = FigureCanvasTkAgg(fig, master=self.graph_frame)
-
         self.axes = fig.add_subplot(111, title=self.func_title, xlabel="α", ylabel="f(x)",)
 
+        # Memberikan batas sumbu-y pada pilihan tan, cosec, sec, dan cotan
         if self.trig_var.get() in ["tan", "cosec", "sec", "cotan"]:
             self.axes.set_ylim(-11, 11)
         else:
@@ -298,26 +265,32 @@ class FungsiPage(ctk.CTkFrame):
         self.axes.set_xticks(np.radians(self.x_ranges))
         self.axes.set_xticklabels([f"{deg}°" for deg in self.x_ranges], rotation=45, ha="right")
 
+        # Membuat grafik
         self.axes.plot(x, y)
         self.axes.grid(True)
 
+        # Menempatkan canvas dan grafik
         self.canvas.draw()
-        self.canvas.get_tk_widget().place(relx=0.5, y=65, anchor="n")
+        self.canvas.get_tk_widget().place(relx=0.5, rely=0.13, relwidth=0.7, relheight=0.7, anchor="n")
         self.canvas.mpl_connect("motion_notify_event", self.on_mouse_hover)
 
+        # Menempatkan judul frame
         self.graph_title.place(relx=0.5, y=40, anchor="center")
+
 
     def display_table(self):
         """
         Method untuk menampilkan tabel trigonometri dari sudut istimewa
         """
+        # Memeriksa apakah widgets sudah dibuat, jika sudah akan dihancurkan untuk dibuat ulang
         if hasattr(self, "table"):
             self.table.destroy()
 
+        # Variable untuk menyimpan nilai yang akan dimasukkan dalam tabel
         value = [["α", "0°", "30°", "45°", "60°", "90°", "120°", "135°", "150°", "180°", "210°", "225°",
             "240°", "270°", "300°", "315°", "330°", "360°"], self.table_results]
 
-
+        # Konfigurasi tabel
         self.table = CTkTable(
             master=self.table_frame,
             column=18,
@@ -335,6 +308,16 @@ class FungsiPage(ctk.CTkFrame):
 
 
 class TrigEquation(ctk.CTkFrame):
+    """Class untuk membuat kumpulan widgets yang berisi radio button, label, dan entry
+    Parameter:
+    master: str = parent untuk frame
+    page: str = variable untuk mengakses class page
+    name: str = nama dari fungsi trigonometri
+    value: str = nilai untuk button
+    equation: str = rumus dari fungsi trigonometri
+    entry_vars : str = variable untuk menyimpan entries
+    **kwargs
+    """
     def __init__(self, master: str = None, page: str = None, name: str = None, value: str = None,
         equation: str = None, **kwargs,):
         super().__init__(master, **kwargs)
@@ -413,10 +396,8 @@ class TrigEquation(ctk.CTkFrame):
         self.x_label.place(x=240, y=50, anchor="w")
 
     def validate_input(self, new_value):
-        if all(
-            char.isdigit() or (char == "-" and new_value.count("-") == 1)
-            for char in new_value
-        ):
+        """Digunakan untuk memvalidasi entry""" 
+        if all(char.isdigit() or (char == "-" and new_value.count("-") == 1) for char in new_value):
             return len(new_value) <= 3
         else:
             return False

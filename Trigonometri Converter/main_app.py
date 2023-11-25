@@ -29,9 +29,9 @@ COLORS = {
     }
 
 def resource_path(relative_path):
-        """ Get absolute path to resource, works for dev and for PyInstaller """
+        """ Mendapatkan absolut path untuk resource, bisa untuk dev atau Pyinstaller """
         try:
-            # PyInstaller creates a temp folder and stores path in _MEIPASS
+            # PyInstaller membuat sebuah folder temp dan menyimpan path di _MEIPASS
             base_path = sys._MEIPASS
         except Exception:
             base_path = os.path.abspath(".")
@@ -119,6 +119,7 @@ class FrontPage(ctk.CTkFrame):
         self.main_title = ctk.CTkLabel(self.header_frame, text="TRIGONOMETRI CONVERTER", wraplength=300,
             text_color=COLORS[10], font=ctk.CTkFont(family=FONT, size=33, weight="bold"))
 
+        # 
         self.middle_frame = ctk.CTkFrame(self, width=383, height=400, corner_radius=30, border_width=4, border_color=COLORS[4],
             fg_color="White")
         self.greetings_label = ctk.CTkLabel(self.middle_frame, text="Hello There...!!", text_color="black",
