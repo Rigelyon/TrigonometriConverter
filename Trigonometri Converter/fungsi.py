@@ -184,7 +184,7 @@ class FungsiPage(ctk.CTkFrame):
                     self.graph_results = self.trig.graph_sec(self.sec_entries[0].get(), self.sec_entries[1].get(), self.graph_x_ranges)
                 case "cotan":
                     # Memasukkan judul fungsi
-                    self.func_title = f"f(x) = {self.cotan_entries[0].get()} Cotan {self.cotan_entries[1]} x"
+                    self.func_title = f"f(x) = {self.cotan_entries[0].get()} Cotan {self.cotan_entries[1].get()} x"
                     # Memasukkan nilai untuk argumen tabel
                     self.table_results = self.trig.table_cotan(self.cotan_entries[0].get(), self.cotan_entries[1].get(), self.x_ranges)
                     # Memasukkan nilai untuk argumen grafik
