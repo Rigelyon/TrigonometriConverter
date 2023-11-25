@@ -218,14 +218,16 @@ class FungsiPage(ctk.CTkFrame):
         self.sec.pack(anchor="n", fill="x")
         self.cotan.pack(anchor="n", fill="x")
 
+        self.figure_size = 100
     def check_screen_resolution(self):
         screen_width = self.master.winfo_screenwidth()
         screen_height = self.master.winfo_screenheight()
+        print(screen_width, screen_height)
         match (screen_width, screen_height):
             case (1920, 1080):
-                self.figure_size = [9, 4.8, 100]
+                self.figure_size = 100
             case (1366, 768):
-                self.figure_size = [6, 3.2, 80]
+                self.figure_size = 80
     
     def on_mouse_hover(self, event):
         """Method untuk menampilkan koordinat ketika mouse hover di canvas grafik"""
@@ -247,7 +249,7 @@ class FungsiPage(ctk.CTkFrame):
         y = self.graph_results
 
         # Konfigurasi canvas untuk grafik
-        fig = Figure(figsize=(self.figure_size[0], self.figure_size[1]), dpi=self.figure_size[2])
+        fig = Figure(dpi=self.figure_size)
         self.canvas = FigureCanvasTkAgg(fig, master=self.graph_frame)
         self.axes = fig.add_subplot(111, title=self.func_title, xlabel="α", ylabel="f(x)",)
 
