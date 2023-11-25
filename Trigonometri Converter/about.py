@@ -1,5 +1,7 @@
 import customtkinter as ctk
+import sys, os
 from PIL import Image
+
 
 # variable
 FONT = "Helvetica"
@@ -23,10 +25,38 @@ COLORS = {
     10:"#082849"
     }
 
-with open("license", "r") as file:
-    text_eula = file.read()
 
+text_eula = """MIT License
 
+Copyright (c) 2023 Pandu Dwi Ashidiqi, Isep Hidayattulah and Delvina Salma Hidayah
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE."""
+
+def resource_path(relative_path):
+        """ Get absolute path to resource, works for dev and for PyInstaller """
+        try:
+            # PyInstaller creates a temp folder and stores path in _MEIPASS
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath(".")
+
+        return os.path.join(base_path, relative_path)
 
 class AboutPage(ctk.CTkFrame):
     """
@@ -41,7 +71,7 @@ class AboutPage(ctk.CTkFrame):
         # Header
         self.header_frame = ctk.CTkFrame(self, height=120, corner_radius=30, border_width=4, border_color=COLORS[4],
             fg_color="White")
-        self.main_icon = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/icon_black.png"),size=(75, 75))
+        self.main_icon = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\icon_black.png")),size=(75, 75))
         self.main_icon_label = ctk.CTkLabel(self.header_frame, text=None, bg_color="transparent", image=self.main_icon)
         self.main_title = ctk.CTkLabel(self.header_frame, text="TRIGONOMETRI CONVERTER", justify="left", wraplength=300,
             text_color=COLORS[10], font=ctk.CTkFont(family=FONT, size=33, weight="bold"))
@@ -58,7 +88,7 @@ class AboutPage(ctk.CTkFrame):
             corner_radius=25, fg_color=COLORS[4],
             font=ctk.CTkFont(family=FONT, size=18, weight="bold"))
 
-        self.authors_icon = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/user_blue.png"), size=(55,55))
+        self.authors_icon = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\user_blue.png")), size=(55,55))
         self.authors_icon_label_1 = ctk.CTkLabel(master=self.authors_frame, image=self.authors_icon, text=None)
         self.authors_icon_label_2 = ctk.CTkLabel(master=self.authors_frame, image=self.authors_icon, text=None)
         self.authors_icon_label_3 = ctk.CTkLabel(master=self.authors_frame, image=self.authors_icon, text=None)
@@ -82,7 +112,7 @@ class AboutPage(ctk.CTkFrame):
             font=ctk.CTkFont(family=FONT, size=18, weight="bold"))
         self.license_text = ctk.CTkLabel(master=self.license_frame, text=text_eula, wraplength=750, justify="left")
 
-        self.arrow_icon = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/arrow.png"), size=(40,20))
+        self.arrow_icon = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\arrow.png")), size=(40,20))
         self.back_button = ctk.CTkButton(master=self.middle_frame, width=200, height=45, text=None,
             text_color=COLORS[0], corner_radius=25, fg_color=COLORS[5], hover_color=COLORS[8], image=self.arrow_icon,
             font=ctk.CTkFont(family=FONT, size=18, weight="normal"),

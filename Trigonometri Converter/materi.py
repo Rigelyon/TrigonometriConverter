@@ -1,5 +1,6 @@
 import customtkinter as ctk
 from PIL import Image
+import sys, os
 
 # variable
 FONT = "Helvetica"
@@ -18,10 +19,15 @@ COLORS = {
     10:"#082849"
     }
 
-with open("license", "r") as file:
-    text_eula = file.read()
+def resource_path(relative_path):
+        """ Get absolute path to resource, works for dev and for PyInstaller """
+        try:
+            # PyInstaller creates a temp folder and stores path in _MEIPASS
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath(".")
 
-
+        return os.path.join(base_path, relative_path)
 
 class MateriPage(ctk.CTkFrame):
     """
@@ -37,7 +43,7 @@ class MateriPage(ctk.CTkFrame):
         # Header
         self.header_frame = ctk.CTkFrame(self, height=120, corner_radius=30, border_width=4, border_color=COLORS[4],
             fg_color="White")
-        self.main_icon = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/icon_black.png"),size=(75, 75))
+        self.main_icon = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\icon_black.png")),size=(75, 75))
         self.main_icon_label = ctk.CTkLabel(self.header_frame, text=None, bg_color="transparent", image=self.main_icon)
         self.main_title = ctk.CTkLabel(self.header_frame, text="TRIGONOMETRI CONVERTER", justify="left", wraplength=300,
             text_color=COLORS[10], font=ctk.CTkFont(family=FONT, size=33, weight="bold"))
@@ -100,11 +106,11 @@ dan = besarnya sudut yang dibentuk oleh sisi-sisi segitiga.
             font=ctk.CTkFont(family=FONT, size=18, weight="bold"))
         self.trigonometri_text = ctk.CTkLabel(master=self.trigonometri_frame, text=trigonometri_text, wraplength=560, justify="left",
             anchor="n", font=ctk.CTkFont(family=FONT, size=18, weight="normal"))
-        self.triangle_image = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/triangle_image.png"), size=(300,280))
+        self.triangle_image = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\triangle_image.png")), size=(300,280))
         self.triangle_image_label = ctk.CTkLabel(master=self, image=self.triangle_image, text=None)
 
-        self.arrow_icon = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/arrow.png"), size=(40,20))
-        self.arrow_icon_flip = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/arrow_flip.png"), size=(40,20))
+        self.arrow_icon = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\arrow.png")), size=(40,20))
+        self.arrow_icon_flip = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\arrow_flip.png")), size=(40,20))
         self.back_button = ctk.CTkButton(master=self, width=200, height=45, text=None,
             text_color=COLORS[0], corner_radius=25, fg_color=COLORS[5], hover_color=COLORS[8], image=self.arrow_icon,
             font=ctk.CTkFont(family=FONT, size=18, weight="normal"),
@@ -147,7 +153,7 @@ class PageTwo(ctk.CTkFrame):
             font=ctk.CTkFont(family=FONT, size=18, weight="bold"))
         self.sin_text = ctk.CTkLabel(master=self.sin_frame, text=sin_text, wraplength=300, justify="left",
             anchor="n", font=ctk.CTkFont(family=FONT, size=18, weight="normal"))
-        self.sin_equation = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/sin_equation.png"), size=(160*1.3,60*1.3))
+        self.sin_equation = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\sin_equation.png")), size=(160*1.3,60*1.3))
         self.sin_equation_label = ctk.CTkLabel(master=self.sin_frame, image=self.sin_equation, text=None)
 
         self.cos_frame = ctk.CTkFrame(master=self, width=600,
@@ -157,7 +163,7 @@ class PageTwo(ctk.CTkFrame):
             font=ctk.CTkFont(family=FONT, size=18, weight="bold"))
         self.cos_text = ctk.CTkLabel(master=self.cos_frame, text=cos_text, wraplength=300, justify="left",
             anchor="n", font=ctk.CTkFont(family=FONT, size=18, weight="normal"))
-        self.cos_equation = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/cos_equation.png"), size=(160*1.3,60*1.3))
+        self.cos_equation = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\cos_equation.png")), size=(160*1.3,60*1.3))
         self.cos_equation_label = ctk.CTkLabel(master=self.cos_frame, image=self.cos_equation, text=None)
 
         self.tan_frame = ctk.CTkFrame(master=self, width=600,
@@ -167,13 +173,13 @@ class PageTwo(ctk.CTkFrame):
             font=ctk.CTkFont(family=FONT, size=18, weight="bold"))
         self.tan_text = ctk.CTkLabel(master=self.tan_frame, text=tan_text, wraplength=300, justify="left",
             anchor="n", font=ctk.CTkFont(family=FONT, size=18, weight="normal"))
-        self.tan_equation = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/tan_equation.png"), size=(160*1.3,60*1.3))
+        self.tan_equation = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\tan_equation.png")), size=(160*1.3,60*1.3))
         self.tan_equation_label = ctk.CTkLabel(master=self.tan_frame, image=self.tan_equation, text=None)
         
 
 
-        self.arrow_icon = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/arrow.png"), size=(40,20))
-        self.arrow_icon_flip = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/arrow_flip.png"), size=(40,20))
+        self.arrow_icon = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\arrow.png")), size=(40,20))
+        self.arrow_icon_flip = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\arrow_flip.png")), size=(40,20))
         self.back_button = ctk.CTkButton(master=self, width=200, height=45, text=None,
             text_color=COLORS[0], corner_radius=25, fg_color=COLORS[5], hover_color=COLORS[8], image=self.arrow_icon,
             font=ctk.CTkFont(family=FONT, size=18, weight="normal"),
@@ -226,7 +232,7 @@ class PageThree(ctk.CTkFrame):
             font=ctk.CTkFont(family=FONT, size=18, weight="bold"))
         self.cosec_text = ctk.CTkLabel(master=self.cosec_frame, text=cosec_text, wraplength=300, justify="left",
             anchor="n", font=ctk.CTkFont(family=FONT, size=18, weight="normal"))
-        self.cosec_equation = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/cosec_equation.png"), size=(160*1.3,65*1.3))
+        self.cosec_equation = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\cosec_equation.png")), size=(160*1.3,65*1.3))
         self.cosec_equation_label = ctk.CTkLabel(master=self.cosec_frame, image=self.cosec_equation, text=None)
 
         self.sec_frame = ctk.CTkFrame(master=self, width=600,
@@ -236,7 +242,7 @@ class PageThree(ctk.CTkFrame):
             font=ctk.CTkFont(family=FONT, size=18, weight="bold"))
         self.sec_text = ctk.CTkLabel(master=self.sec_frame, text=sec_text, wraplength=300, justify="left",
             anchor="n", font=ctk.CTkFont(family=FONT, size=18, weight="normal"))
-        self.sec_equation = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/sec_equation.png"), size=(160*1.3,65*1.3))
+        self.sec_equation = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\sec_equation.png")), size=(160*1.3,65*1.3))
         self.sec_equation_label = ctk.CTkLabel(master=self.sec_frame, image=self.sec_equation, text=None)
 
         self.cotan_frame = ctk.CTkFrame(master=self, width=600,
@@ -246,11 +252,11 @@ class PageThree(ctk.CTkFrame):
             font=ctk.CTkFont(family=FONT, size=18, weight="bold"))
         self.cotan_text = ctk.CTkLabel(master=self.cotan_frame, text=cotan_text, wraplength=300, justify="left",
             anchor="n", font=ctk.CTkFont(family=FONT, size=18, weight="normal"))
-        self.cotan_equation = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/cotan_equation.png"), size=(160*1.3,65*1.3))
+        self.cotan_equation = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\cotan_equation.png")), size=(160*1.3,65*1.3))
         self.cotan_equation_label = ctk.CTkLabel(master=self.cotan_frame, image=self.cotan_equation, text=None)
 
-        self.arrow_icon = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/arrow.png"), size=(40,20))
-        self.arrow_icon_flip = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/arrow_flip.png"), size=(40,20))
+        self.arrow_icon = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\arrow.png")), size=(40,20))
+        self.arrow_icon_flip = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\arrow_flip.png")), size=(40,20))
         self.back_button = ctk.CTkButton(master=self, width=200, height=45, text=None,
             text_color=COLORS[0], corner_radius=25, fg_color=COLORS[5], hover_color=COLORS[8], image=self.arrow_icon,
             font=ctk.CTkFont(family=FONT, size=18, weight="normal"),

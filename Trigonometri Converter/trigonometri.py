@@ -114,7 +114,7 @@ class Trigonometri:
     def graph_cotan(self, left_entry, right_entry, x_range):
         x = x_range
         for i in x_range:
-            tan_value = np.cos(right_entry * x)
-            cotan_value = 1 / tan_value
+            tan_value = np.tan(right_entry * x)
+            cotan_value = 1 / tan_value 
             y = left_entry * cotan_value
         return y 

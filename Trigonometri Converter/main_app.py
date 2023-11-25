@@ -2,16 +2,17 @@ import customtkinter as ctk
 import tkinter as tk
 from tkinter import messagebox
 from PIL import Image
-import os
+import sys, os
 
 from fungsi import FungsiPage
 from about import AboutPage
 from materi import MateriPage
 
+
 # Const untuk size window dan font
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 675
-FONT = "Inter"
+FONT = "Helvetica"
 
 COLORS = {
     0:"#f0f7ff",
@@ -27,6 +28,15 @@ COLORS = {
     10:"#082849"
     }
 
+def resource_path(relative_path):
+        """ Get absolute path to resource, works for dev and for PyInstaller """
+        try:
+            # PyInstaller creates a temp folder and stores path in _MEIPASS
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath(".")
+
+        return os.path.join(base_path, relative_path)
 
 class App(ctk.CTk):
     """
@@ -43,7 +53,7 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title("Trigonometri Converter")
-        self.iconbitmap("Trigonometri Converter/Assets/icon.ico")
+        self.iconbitmap(resource_path("icon.ico"))
         self.geometry(f"{WINDOW_WIDTH}x{WINDOW_HEIGHT}+0+0")
         self.minsize(WINDOW_WIDTH, WINDOW_HEIGHT)
         self.grid_columnconfigure(0, weight=1)
@@ -100,10 +110,10 @@ class FrontPage(ctk.CTkFrame):
         self.header_frame = ctk.CTkFrame(self, height=120, corner_radius=30, border_width=4, border_color=COLORS[4],
             fg_color="White")
 
-        self.unsil_icon = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/unsil_icon.png"), size=(90, 90))
+        self.unsil_icon = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\unsil_icon.png")), size=(90, 90))
         self.unsil_icon_label = ctk.CTkLabel(self.header_frame, text=None, bg_color="transparent", image=self.unsil_icon)
 
-        self.main_icon = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/icon_black.png"),size=(90, 90))
+        self.main_icon = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\icon_black.png")),size=(90, 90))
         self.main_icon_label = ctk.CTkLabel(self.header_frame, text=None, bg_color="transparent", image=self.main_icon)
 
         self.main_title = ctk.CTkLabel(self.header_frame, text="TRIGONOMETRI CONVERTER", wraplength=300,

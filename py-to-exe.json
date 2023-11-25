@@ -1,0 +1,177 @@
+{
+ "version": "auto-py-to-exe-configuration_v1",
+ "pyinstallerOptions": [
+  {
+   "optionDest": "noconfirm",
+   "value": true
+  },
+  {
+   "optionDest": "filenames",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/Trigonometri Converter/main_app.py"
+  },
+  {
+   "optionDest": "onefile",
+   "value": false
+  },
+  {
+   "optionDest": "console",
+   "value": false
+  },
+  {
+   "optionDest": "icon_file",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/icon.ico"
+  },
+  {
+   "optionDest": "name",
+   "value": "Trigonometri Converter"
+  },
+  {
+   "optionDest": "clean_build",
+   "value": false
+  },
+  {
+   "optionDest": "strip",
+   "value": false
+  },
+  {
+   "optionDest": "noupx",
+   "value": false
+  },
+  {
+   "optionDest": "disable_windowed_traceback",
+   "value": false
+  },
+  {
+   "optionDest": "uac_admin",
+   "value": false
+  },
+  {
+   "optionDest": "uac_uiaccess",
+   "value": false
+  },
+  {
+   "optionDest": "argv_emulation",
+   "value": false
+  },
+  {
+   "optionDest": "bootloader_ignore_signals",
+   "value": false
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/Trigonometri Converter/about.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/Trigonometri Converter/fungsi.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/Trigonometri Converter/license.txt;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/Trigonometri Converter/materi.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/Trigonometri Converter/trigonometri.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/output/Trigonometri Converter/_internal/CTkTable;CTkTable/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/output/Trigonometri Converter/_internal/customtkinter;customtkinter/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/output/Trigonometri Converter/_internal/numpy;numpy/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/output/Trigonometri Converter/_internal/numpy.libs;numpy.libs/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/output/Trigonometri Converter/_internal/tcl;tcl/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/output/Trigonometri Converter/_internal/tcl8;tcl8/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/output/Trigonometri Converter/_internal/tk;tk/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/output/Trigonometri Converter/_internal/wheel-0.41.2.dist-info;wheel-0.41.2.dist-info/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/env/Lib/site-packages/PIL;PIL/"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "secrets"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/env/Lib/site-packages/matplotlib.libs;matplotlib.libs/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/env/Lib/site-packages/matplotlib;matplotlib/"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pyparsing"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/env/Lib/site-packages/cycler;cycler/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/env/Lib/site-packages/dateutil;dateutil/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/env/Lib/site-packages/setuptools;setuptools/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/env/Lib/site-packages/kiwisolver;kiwisolver/"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "uuid"
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/env/Lib/site-packages/six.py;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/icon.ico;."
+  },
+  {
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/Trigonometri Converter/Assets;Assets/"
+  },
+  {
+   "optionDest": "pathex",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter"
+  },
+  {
+   "optionDest": "pathex",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/Trigonometri Converter"
+  }
+ ],
+ "nonPyinstallerOptions": {
+  "increaseRecursionLimit": true,
+  "manualArguments": ""
+ }
+}

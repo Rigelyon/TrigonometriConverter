@@ -3,6 +3,7 @@ from CTkTable import CTkTable
 from tkinter import messagebox as msgbox
 from PIL import Image
 import numpy as np
+import sys, os
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from matplotlib.backend_bases import MouseButton
@@ -26,6 +27,16 @@ COLORS = {
     9:"#0c406e",
     10:"#082849"
     }
+
+def resource_path(relative_path):
+        """ Get absolute path to resource, works for dev and for PyInstaller """
+        try:
+            # PyInstaller creates a temp folder and stores path in _MEIPASS
+            base_path = sys._MEIPASS
+        except Exception:
+            base_path = os.path.abspath(".")
+
+        return os.path.join(base_path, relative_path)
 
 class FungsiPage(ctk.CTkFrame):
     """
@@ -75,7 +86,7 @@ class FungsiPage(ctk.CTkFrame):
         self.left_frame.grid_rowconfigure(0, weight=1)
         self.left_title = ctk.CTkLabel(master=self.left_frame, text="TRIGONOMETRI CONVERTER", text_color="black",
             font=ctk.CTkFont(family=FONT, size=22, weight="bold"))
-        self.arrow_icon = ctk.CTkImage(dark_image=Image.open("Trigonometri Converter/Assets/arrow.png"), size=(40,20))
+        self.arrow_icon = ctk.CTkImage(dark_image=Image.open(resource_path("Assets\\arrow.png")), size=(40,20))
         self.back_button = ctk.CTkButton(master=self.left_frame, text=None, width=120, height=40, image=self.arrow_icon,
             text_color=COLORS[0], corner_radius=25, fg_color=COLORS[5], hover_color=COLORS[8],
             font=ctk.CTkFont(family=FONT, size=15, weight="normal"),
