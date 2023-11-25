@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="./src/Assets/logo_white.png" alt="Trigonometri" width="128" />
+  <img src="./Assets/icon_white.png" alt="Trigonometri" width="128" />
   <br>
   Trigonometri Converter
   <br>
