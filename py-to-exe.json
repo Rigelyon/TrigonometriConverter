@@ -11,7 +11,7 @@
   },
   {
    "optionDest": "onefile",
-   "value": false
+   "value": true
   },
   {
    "optionDest": "console",
@@ -64,10 +64,6 @@
   {
    "optionDest": "datas",
    "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/Trigonometri Converter/fungsi.py;."
-  },
-  {
-   "optionDest": "datas",
-   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/Trigonometri Converter/license.txt;."
   },
   {
    "optionDest": "datas",
@@ -159,15 +155,11 @@
   },
   {
    "optionDest": "datas",
-   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/Trigonometri Converter/Assets;Assets/"
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/LICENSE.txt;."
   },
   {
-   "optionDest": "pathex",
-   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter"
-  },
-  {
-   "optionDest": "pathex",
-   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/Trigonometri Converter"
+   "optionDest": "datas",
+   "value": "C:/Users/Pandu Dwi Ashidiqi/TrigonometriConverter/Assets;Assets/"
   }
  ],
  "nonPyinstallerOptions": {
