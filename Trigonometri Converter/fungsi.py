@@ -222,7 +222,6 @@ class FungsiPage(ctk.CTkFrame):
     def check_screen_resolution(self):
         screen_width = self.master.winfo_screenwidth()
         screen_height = self.master.winfo_screenheight()
-        print(screen_width, screen_height)
         match (screen_width, screen_height):
             case (1920, 1080):
                 self.figure_size = 100
