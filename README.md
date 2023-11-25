@@ -29,7 +29,7 @@ Trigonometri Converter is a versatile software designed to handle trigonometric 
 4. **View Table:** Access a table displaying the values of the chosen function at common angles.
 
 ## Installation
-Download from release
+Download from [releases](https://github.com/Rigelyon/TrigonometriConverter/releases)
 
 ## Contributing
 ```bash
