@@ -16,6 +16,8 @@ Trigonometri Converter is a versatile software designed to handle trigonometric 
 3. **Table of Common Angles:** Generate a table displaying the values of the trigonometric functions at common angles.
 
 4. **Multiple Functions:** Support for a variety of trigonometric functions, including sine, cosine, tangent, cosecant, secant, and cotangent.
+## Preview
+![preview](./Docs/preview.gif)
 
 ## Usage
 1. **Input Equation:** Provide the trigonometric equation you want to convert. For example, **f(x) = 2 Sin 3x.**
