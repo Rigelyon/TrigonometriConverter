@@ -44,4 +44,4 @@ If you'd like to contribute to Trigonometri Converter, please follow these steps
 4. Submit a pull request.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License.](./LICENSE.txt)
